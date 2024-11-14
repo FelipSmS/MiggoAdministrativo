@@ -1,41 +1,34 @@
 ﻿@page "/aprovacoes"
+@using miggo.adminitrativo.Pages.Aprovacoes.Components
 
 <PageTitle>Aprovações</PageTitle>
 
 <div class="container-fluid mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 text-gray-800">Aprovações de Criação</h1>
-        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCriarSolicitacao">
-            Criar Solicitação
-        </button> -->
     </div>
     <div class="row">
-        <!-- Barra Lateral de Filtros -->
         <div class="col-lg-2 mb-4">
             <div class="card shadow">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Filtros</h6>
                 </div>
                 <div class="card-body">
-                    <!-- Filtro por ID -->
                     <div class="form-group">
-                        <label for="filtroId">ID da Solicitação</label>
+                        <label for="filtroId">ID da Aprovação</label>
                         <input type="text" class="form-control" id="filtroId" placeholder="Digite o ID">
                     </div>
 
-                    <!-- Filtro por Cliente -->
                     <div class="form-group">
-                        <label for="filtroCliente">Cliente</label>
-                        <input type="text" class="form-control" id="filtroCliente" placeholder="Nome do Cliente">
+                        <label for="filtroCriador">Criador</label>
+                        <input type="text" class="form-control" id="filtroCliente" placeholder="Nome do Criador">
                     </div>
 
-                    <!-- Filtro por Data de Envio -->
                     <div class="form-group">
-                        <label for="filtroDataEnvio">Data de Envio</label>
-                        <input type="date" class="form-control" id="filtroDataEnvio">
+                        <label for="filtroDataCriacao">Data de Criação</label>
+                        <input type="date" class="form-control" id="filtroDataCriacao">
                     </div>
 
-                    <!-- Filtro por Status -->
                     <div class="form-group">
                         <label for="filtroStatus">Status</label>
                         <select class="form-control" id="filtroStatus">
@@ -47,19 +40,16 @@
                         </select>
                     </div>
 
-                    <!-- Filtro por Prazo para Entrega -->
                     <div class="form-group">
                         <label for="filtroPrazoEntrega">Prazo para Entrega</label>
                         <input type="date" class="form-control" id="filtroPrazoEntrega">
                     </div>
 
-                    <!-- Botão para Filtrar -->
                     <button class="btn btn-primary btn-block mt-3" @onclick="FiltrarSolicitacoes">Filtrar</button>
                 </div>
             </div>
         </div>
 
-        <!-- Tabela de Aprovações -->
         <div class="col-lg-10">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -80,19 +70,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Exemplo de Linha de Dados -->
                                 <tr>
                                     <td>1</td>
                                     <td>45588</td>
                                     <td>Luan Almeida</td>
                                     <td>2024-10-01</td>
-                                    <td>
-                                        <span class="badge badge-success">Concluído</span>
-                                    </td>
+                                    <td><span class="badge badge-success">Concluído</span></td>
                                     <td>2024-10-29</td>
-                                    <td><i class="bi bi-file-earmark-text"></i></td>
+                                    <td><button class="btn btn-primary" @onclick="MostrarPainelDetalhes">Ação</button></td>
                                 </tr>
-                                <!-- Adicione mais linhas conforme necessário -->
                             </tbody>
                         </table>
                     </div>
@@ -102,13 +88,25 @@
     </div>
 </div>
 
-<ModalCriarSolicitacao />
+@if (mostrarPainelDetalhes)
+{
+    <PainelDetalhes OnFechar="FecharPainelDetalhes" />
+}
 
 @code {
-    // Método para filtrar as solicitações
+    private bool mostrarPainelDetalhes = false;
+
+    private void MostrarPainelDetalhes()
+    {
+        mostrarPainelDetalhes = true;
+    }
+
+    private void FecharPainelDetalhes()
+    {
+        mostrarPainelDetalhes = false;
+    }
+
     private void FiltrarSolicitacoes()
     {
-        // Adicione aqui a lógica para aplicar os filtros conforme necessário.
-        // Pode envolver a captura dos valores dos campos e a atualização da lista de solicitações.
     }
 }

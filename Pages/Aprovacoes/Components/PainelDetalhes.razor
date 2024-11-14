@@ -1,0 +1,232 @@
+@page "/painel-detalhes"
+
+<div class="overlay">
+    <div class="painel-detalhes">
+        <div class="header">
+            <h2>Painel de Novas Criação</h2>
+            <div class="action-buttons">
+                <button class="btn btn-gray" @onclick="VoltarParaLista">Voltar para a Lista de Criações</button>
+                <button class="btn btn-blue" @onclick="AbrirFeedbackModal">Devolver</button>
+                <button class="btn btn-red" @onclick="AbrirFeedbackModal">Recusar</button>
+                <button class="btn btn-green">Aprovar</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="form-section">
+                <label>Título</label>
+                <input type="text" class="input-field" />
+
+                <label>Formato</label>
+                <input type="text" class="input-field" />
+
+                <label>Tema</label>
+                <input type="text" class="input-field" />
+
+                <label>Contextos</label>
+                <textarea class="textarea-field"></textarea>
+
+                <label>Design</label>
+                <textarea class="textarea-field" readonly></textarea>
+
+                <label>CTA de Legenda</label>
+                <textarea class="textarea-field"></textarea>
+            </div>
+
+            <div class="design-preview">
+                <div class="preview-box">
+                    DESIGN
+                </div>
+
+                <div class="legend-box">
+                    <label>Legenda</label>
+                    <textarea class="textarea-field" readonly></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@if (MostrarModalFeedback)
+{
+    <div class="modal-overlay">
+        <div class="modal-feedback">
+            <h3>Enviar Feedback</h3>
+            <label>Motivo</label>
+            <textarea class="textarea-field" @bind="MotivoFeedback"></textarea>
+            <div class="modal-buttons">
+                <button class="btn btn-gray" @onclick="FecharFeedbackModal">Cancelar</button>
+                <button class="btn btn-blue" @onclick="EnviarFeedback">Enviar</button>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+.painel-detalhes {
+    background-color: #fff;
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.action-buttons .btn {
+    margin-left: 10px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-gray { background-color: #6c757d; color: white; }
+.btn-blue { background-color: #6fa8dc; color: white; }
+.btn-red { background-color: #e06666; color: white; }
+.btn-green { background-color: #93c47d; color: white; }
+
+.content {
+    display: flex;
+    margin-top: 20px;
+}
+
+.form-section {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.form-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-field, .textarea-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f0f0f0; 
+}
+
+.input-field, .textarea-field {
+    font-size: 0.9rem;
+}
+
+.input-field, .textarea-field {
+    background-color: #f0f0f0;  
+}
+
+.design-preview {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview-box {
+    width: 80%;
+    height: 400px;
+    background-color: #e6e6e6;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 400px;
+    font-size: 24px;
+}
+
+.legend-box {
+    width: 80%;
+    margin-top: 20px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1060;
+}
+
+.modal-feedback {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+
+</style>
+
+@code {
+    [Parameter] public EventCallback OnFechar { get; set; }
+
+    private bool MostrarModalFeedback { get; set; } = false;
+    private string MotivoFeedback { get; set; } = string.Empty;
+
+    private void FecharFeedbackModal()
+    {
+        MostrarModalFeedback = false;
+    }
+
+    private void AbrirFeedbackModal()
+    {
+        MostrarModalFeedback = true;
+    }
+
+    private void EnviarFeedback()
+    {
+        Console.WriteLine($"Motivo: {MotivoFeedback}");
+
+        MostrarModalFeedback = false;
+    }
+
+    private void VoltarParaLista()
+    {
+        OnFechar.InvokeAsync();
+    }
+}
