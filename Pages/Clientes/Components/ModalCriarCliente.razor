@@ -1,71 +1,172 @@
-<div class="modal fade" id="modalCriarCliente" tabindex="-1" aria-labelledby="modalCriarCliente"
-     aria-hidden="true">
+<div class="modal fade" id="modalCriarCliente" tabindex="-1" aria-labelledby="modalCriarCliente" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content custom-modal-content">
             <div class="modal-header">
-            <div class="d-flex justify-content-center">
-                <h5 class="modal-title" id="modalCriarClienteLabel"><b>Cadastro de Cliente</b></h5>
-            </div>
+                <h5 class="modal-title"><b>Cadastro de Cliente</b></h5>
+                <button type="button" class="btn-close" @onclick="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
-                    <!-- Campo Nome do responsável -->
                     <div class="mb-3">
-                        <input type="text" class="form-control custom-input" id="nomeCliente" placeholder="Nome do responsável">
+                        <input type="text" class="form-control custom-input" placeholder="Nome do responsável">
                     </div>
-
-                    <!-- Campo Email -->
                     <div class="mb-3">
-                        <input type="email" class="form-control custom-input" id="emailCliente" placeholder="Email">
+                        <input type="email" class="form-control custom-input" placeholder="Email">
                     </div>
-
-                    <!-- Campo Telefone Celular -->
                     <div class="mb-3">
-                        <input type="tel" class="form-control custom-input" id="telefoneCliente" placeholder="Telefone Celular">
+                        <input type="tel" class="form-control custom-input" placeholder="Telefone Celular">
                     </div>
                 </form>
             </div>
-            <div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal" @onclick="Close">Fechar</button>
+                <button type="button" class="btn btn-secondary" @onclick="Close">Fechar</button>
                 <button type="button" class="btn btn-primary" @onclick="LiberarOpcoes">Enviar</button>
             </div>
 
-
-                @if(Liberar == true)
-                {
-                  <div class="d-flex justify-content-center gap-4 p-3">
-                    <div class="text-center border rounded p-3">
-                        <p>Pessoa Física</p>
-                        <button class="btn btn-primary" data-bs-dismiss="modal">Selecionar</button>
-                    </div>
-
-                    <div class="text-center border rounded p-3">
-                        <p>Pessoa Jurídica</p>
-                        <button class="btn btn-primary" data-bs-dismiss="modal">Selecionar</button>
-                    </div>
+            @if (Liberar)
+            {
+                <div class="d-flex justify-content-center gap-4 p-3">
+                    <button class="btn btn-primary" data-bs-dismiss="modal" @onclick="AbrirModalPessoaFisica">Pessoa
+                        Física</button>
+                    <button class="btn btn-primary" data-bs-dismiss="modal" @onclick="AbrirModalPessoaJuridica">Pessoa
+                        Jurídica</button>
                 </div>
-
-                }
-
-            </div>
+            }
         </div>
     </div>
 </div>
 
-@code{
+<!-- Modal Pessoa Física -->
+@if (MostrarModalPessoaFisica)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastro de Usuário - Pessoa Física</h5>
+                    <button type="button" class="btn-close" @onclick="FecharModalPessoaFisica"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="text" class="form-control mb-3" placeholder="CPF">
+                        <input type="date" class="form-control mb-3" placeholder="Data de Nascimento">
+                        <input type="text" class="form-control mb-3" placeholder="Rua">
+                        <div class="row mb-3">
+                            <div class="col"><input type="text" class="form-control" placeholder="Número"></div>
+                            <div class="col"><input type="text" class="form-control" placeholder="Cidade"></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col"><input type="text" class="form-control" placeholder="Estado"></div>
+                            <div class="col"><input type="text" class="form-control" placeholder="CEP"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @onclick="FecharModalPessoaFisica">Concluir
+                        Cadastro</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
-    public bool Liberar {get;set;}
+<!-- Modal Pessoa Jurídica -->
+@if (MostrarModalPessoaJuridica)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastro de Usuário - Pessoa Jurídica</h5>
+                    <button type="button" class="btn-close" @onclick="FecharModalPessoaJuridica"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="text" class="form-control custom-input" placeholder="CNPJ">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control custom-input" placeholder="Razão Social">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="text" class="form-control custom-input" placeholder="Nome Fantasia">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control custom-input" placeholder="Inscrição Estadual">
+                            </div>
+                        </div>
+                        <h6>Endereço:</h6>
+                        <div class="mb-3">
+                            <input type="text" class="form-control custom-input" placeholder="Rua">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="text" class="form-control custom-input" placeholder="Número">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control custom-input" placeholder="Cidade">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="text" class="form-control custom-input" placeholder="Estado">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control custom-input" placeholder="CEP">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @onclick="FecharModalPessoaJuridica">Concluir
+                        Cadastro</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@code {
+    public bool Liberar { get; set; } = false;
+    public bool MostrarModalPessoaFisica { get; set; } = false;
+    public bool MostrarModalPessoaJuridica { get; set; } = false;
 
     public void Close()
     {
         Liberar = false;
+        MostrarModalPessoaFisica = false;
+        MostrarModalPessoaJuridica = false;
     }
- 
 
     public void LiberarOpcoes()
     {
         Liberar = true;
     }
 
+    public void AbrirModalPessoaFisica()
+    {
+        Close();
+        MostrarModalPessoaFisica = true;
+    }
+
+    public void FecharModalPessoaFisica()
+    {
+        MostrarModalPessoaFisica = false;
+    }
+
+    public void AbrirModalPessoaJuridica()
+    {
+        Close();
+        MostrarModalPessoaJuridica = true;
+    }
+
+    public void FecharModalPessoaJuridica()
+    {
+        MostrarModalPessoaJuridica = false;
+    }
 }
