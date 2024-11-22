@@ -18,6 +18,11 @@
                                         <h1 class="h4 text-gray-900 mb-4">Bem-vindo de volta!</h1>
                                     </div>
 
+                                    @if (!string.IsNullOrEmpty(mensagemErro))
+                                    {
+                                        <div class="alert alert-danger text-center">@mensagemErro</div>
+                                    }
+
                                     <EditForm Model="@modeloLogin" OnValidSubmit="ProcessarLogin">
                                         <div class="form-group">
                                             <InputText class="form-control form-control-user" placeholder="Digite seu usuário..." @bind-Value="modeloLogin.Usuario" />
@@ -25,7 +30,7 @@
                                         <div class="form-group">
                                             <InputText class="form-control form-control-user" placeholder="Digite sua senha..." @bind-Value="modeloLogin.Senha" type="password" />
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Entrar</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" disabled="@bloqueado">Entrar</button>
                                     </EditForm>
 
                                     <hr />
@@ -47,12 +52,45 @@
 
 @code {
     private ModeloLogin modeloLogin = new ModeloLogin();
+    private string mensagemErro = string.Empty;
+    private int tentativasErradas = 0;
+    private bool bloqueado = false;
+
     private void ProcessarLogin()
     {
+        if (bloqueado)
+        {
+            mensagemErro = "Muitas tentativas falhas. Tente novamente mais tarde.";
+            return;
+        }
+
         if (modeloLogin.Usuario == "admin" && modeloLogin.Senha == "admin")
         {
             Navigation.NavigateTo("/home");
+            tentativasErradas = 0; 
         }
+        else
+        {
+            tentativasErradas++;
+            if (tentativasErradas >= 3)
+            {
+                bloqueado = true;
+                mensagemErro = "Você excedeu o número de tentativas. Tente novamente em 1 minuto.";
+                BloquearTemporariamente();
+            }
+            else
+            {
+                mensagemErro = $"Credenciais incorretas. Tentativa {tentativasErradas} de 3.";
+            }
+        }
+    }
+
+    private async void BloquearTemporariamente()
+    {
+        await Task.Delay(60000); 
+        bloqueado = false;
+        mensagemErro = string.Empty;
+        tentativasErradas = 0;
     }
 
     public class ModeloLogin
