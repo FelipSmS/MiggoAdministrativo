@@ -31,11 +31,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" @onclick="EditarUsuario">Salvar usuário editado</button>
+                <button type="button" class="btn btn-primary" @onclick="EditarUsuario" data-bs-toggle="modal" data-bs-target="#modalConfirmacao">Salvar usuário editado</button>
             </div>
         </div>
     </div>
 </div>
+
+<ModalConfirmacao Sucesso="false"/>
 
 @code {
     private void EditarUsuario()

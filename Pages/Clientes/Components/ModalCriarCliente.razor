@@ -121,7 +121,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" @onclick="FecharModalPessoaJuridica">Concluir
+                    <button type="button" class="btn btn-primary" @onclick="FecharModalPessoaJuridica" data-bs-toggle="modal" data-bs-target="#modalConfirmacao">Concluir
                         Cadastro</button>
                 </div>
             </div>
@@ -129,7 +129,7 @@
     </div>
 }
 
-
+<ModalConfirmacao Sucesso="false"/>
 
 @code {
     public bool Liberar { get; set; } = false;

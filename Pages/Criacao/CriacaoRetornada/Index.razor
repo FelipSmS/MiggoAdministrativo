@@ -1,0 +1,148 @@
+﻿@page "/criacao-retornada"
+
+<PageTitle>Criações Retornadas</PageTitle>
+
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 text-gray-800">Criações Retornadas</h1>
+    </div>
+    <div class="row">
+        <!-- Barra Lateral de Filtros -->
+        <div class="col-lg-2 mb-4">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Filtros</h6>
+                </div>
+                <div class="card-body">
+                    <!-- Filtros -->
+                    <div class="form-group">
+                        <label for="filtroId">ID da Solicitação</label>
+                        <input type="text" class="form-control" id="filtroId" placeholder="Digite o ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="filtroCliente">Cliente</label>
+                        <input type="text" class="form-control" id="filtroCliente" placeholder="Nome do Cliente">
+                    </div>
+                    <div class="form-group">
+                        <label for="filtroCliente">Data de Aprovação</label>
+                        <input type="date" class="form-control" id="filtroClienteDataAprovacao">
+                    </div>
+                    <div class="form-group">
+                        <label for="filtroStatus">Status</label>
+                        <input type="text" class="form-control" id="filtroStatus" placeholder="Status">
+                    </div>
+                    <div class="form-group">
+                        <label for="filtroPrazoEntrega">Prazo para Entrega</label>
+                        <input type="date" class="form-control" id="filtroPrazoEntrega">
+                    </div>
+                    <button class="btn btn-primary btn-block mt-3" @onclick="FiltrarSolicitacoes">Filtrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela de Solicitações -->
+        <div class="col-lg-10">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Criações</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Título</th>
+                                    <th>Data de Aprovação</th>
+                                    <th>Status</th>
+                                    <th>Prazo de Entrega</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Exemplo 1: Devolvida -->
+                                <tr>
+                                    <td>1</td>
+                                    <td>Felipe Silva</td>
+                                    <td>Post para Instagram</td>
+                                    <td>12/10/2024</td>
+                                    <td>
+                                        <span class="badge bg-info text-white">Devolvida</span>
+                                    </td>
+                                    <td>29/10/2024</td>
+                                    <td>
+                                        <a href="/criacao/retornada/false" class="btn btn-primary">Ver</a>
+                                    </td>
+                                </tr>
+                                <!-- Exemplo 2: Recusada -->
+                                <tr>
+                                    <td>2</td>
+                                    <td>João Almeida</td>
+                                    <td>Banner de Promoção</td>
+                                    <td>15/10/2024</td>
+                                    <td>
+                                        <span class="badge bg-danger text-white">Recusada</span>
+                                    </td>
+                                    <td>30/10/2024</td>
+                                    <td>
+                                        <a href="/criacao/retornada/true" class="btn btn-primary">Ver</a>
+                                    </td>
+                                </tr>
+                                <!-- Exemplo 3: Devolvida -->
+                                <tr>
+                                    <td>3</td>
+                                    <td>Maria Oliveira</td>
+                                    <td>Campanha de E-mail</td>
+                                    <td>17/10/2024</td>
+                                    <td>
+                                        <span class="badge bg-info text-white">Devolvida</span>
+                                    </td>
+                                    <td>31/10/2024</td>
+                                    <td>
+                                        <a href="/criacao/retornada/false" class="btn btn-primary">Ver</a>
+                                    </td>
+                                </tr>
+                                <!-- Exemplo 4: Recusada -->
+                                <tr>
+                                    <td>4</td>
+                                    <td>Roberto Lima</td>
+                                    <td>Flyer Digital</td>
+                                    <td>20/10/2024</td>
+                                    <td>
+                                        <span class="badge bg-danger text-white">Recusada</span>
+                                    </td>
+                                    <td>01/11/2024</td>
+                                    <td>
+                                        <a href="/criacao/retornada/true" class="btn btn-primary">Ver</a>
+                                    </td>
+                                </tr>
+                                <!-- Exemplo 5: Devolvida -->
+                                <tr>
+                                    <td>5</td>
+                                    <td>Ana Souza</td>
+                                    <td>Vídeo para Redes Sociais</td>
+                                    <td>22/10/2024</td>
+                                    <td>
+                                        <span class="badge bg-info text-white">Devolvida</span>
+                                    </td>
+                                    <td>05/11/2024</td>
+                                    <td>
+                                        <a href="/criacao/retornada/false" class="btn btn-primary">Ver</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private void FiltrarSolicitacoes()
+    {
+        // Adicione a lógica de filtragem aqui.
+    }
+}

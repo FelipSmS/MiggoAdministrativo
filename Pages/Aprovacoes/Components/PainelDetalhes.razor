@@ -57,7 +57,7 @@
             <textarea class="textarea-field" @bind="MotivoFeedback"></textarea>
             <div class="modal-buttons">
                 <button class="btn btn-gray" @onclick="FecharFeedbackModal">Cancelar</button>
-                <button class="btn btn-blue" @onclick="EnviarFeedback">Enviar</button>
+                <button class="btn btn-blue" @onclick="EnviarFeedback" data-bs-toggle="modal" data-bs-target="#modalConfirmacao">Enviar</button>
             </div>
         </div>
     </div>
@@ -201,6 +201,8 @@
 
 
 </style>
+
+<ModalConfirmacao Sucesso="true"/>
 
 @code {
     [Parameter] public EventCallback OnFechar { get; set; }

@@ -105,11 +105,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" @onclick="SalvarSolicitacao">Salvar Solicitação</button>
+                <button  class="btn btn-primary" @onclick="SalvarSolicitacao" data-bs-toggle="modal" data-bs-target="#modalConfirmacao">Salvar Solicitação</button>
             </div>
         </div>
     </div>
 </div>
+
+<ModalConfirmacao Sucesso="true"/>
+
 
 @code {
     private void SalvarSolicitacao()

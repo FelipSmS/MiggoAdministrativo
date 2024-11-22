@@ -1,0 +1,149 @@
+@page "/criacao/retornada/{recusada:bool}"
+
+<PageTitle>Painel de Novas Criações</PageTitle>
+
+<div class="container-fluid">
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-3 flex-wrap">
+        <h1 class="h4 text-gray-800 mb-3">Painel de Criações Retornadas</h1>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="row gy-4">
+        <!-- Coluna da esquerda: Formulário -->
+        <div class="col-12 col-md-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <!-- Formulário -->
+                    <div class="form-group mb-3">
+                        <label for="titulo">Título</label>
+                        <input type="text" id="titulo" class="form-control" placeholder="Post para Feed do Instagram" disabled>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="formato">Formato</label>
+                        <input type="text" id="formato" class="form-control" placeholder="Feed" disabled>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="tema">Tema</label>
+                        <input type="text" id="tema" class="form-control" placeholder="Promoção Especial de Halloween" disabled>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="contextos">Contextos</label>
+                        <textarea id="contextos" class="form-control" rows="2" placeholder="Tendências de Halloween 2024, decoração e fantasias populares" disabled></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="design">Design</label>
+                        <textarea id="design" class="form-control" rows="3" placeholder="Uso de cores escuras (preto, roxo e laranja), ilustrações minimalistas de abóboras e fantasmas. Elementos de oferta destacados." disabled></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="cta">CTA de Legenda</label>
+                        <input type="text" id="cta" class="form-control" placeholder="Descontos Assustadores!" disabled>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="cta">Legenda</label>
+                        <textarea id="cta" @bind="descricaoPost" class="form-control" placeholder="Descontos Assustadores!" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna da direita: Pré-visualização -->
+
+                    <!-- Botões -->
+
+
+        <div class="col-12 col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-5">
+                        <div style="font-weight: bold; font-size: 1.2rem;">
+                            Status: 
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#feedbackModal"
+                            style="color: @(recusada ? "red" : "blue"); text-decoration: none;">
+                                @(recusada ? "Recusada" : "Devolvida")
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="row gy-4">
+                        <!-- Pré-visualização 1 -->
+                        <div class="col-12 col-sm-6 text-center">
+                            <img src="/img/ImagemBase.png" class="img-fluid border rounded" alt="Pré-visualização de criação">
+                            <button class="btn btn-primary mt-2 d-block w-100">Realizar Upload</button>
+                            <button class="btn btn-info mt-2 d-block w-100">Gerar com IA</button>
+                        </div>
+
+                        <!-- Mockup do celular -->
+                        <div class="col-12 col-sm-6 text-center position-relative" style="max-width: 400px; margin: 0 auto;">
+                            <!-- Mockup do celular -->
+                            <img src="/img/CelularPreVisualizacao.png" class="img-fluid" alt="Pré-visualização no Instagram" style="width: 100%;">
+
+                            <!-- Imagem Base ajustada -->
+                            <div style="position: absolute; top: 40%; left: 7.5%; width: 86%; height: 25%; display: flex; align-items: center; justify-content: center;">
+                                <img src="/img/ImagemBase.png" class="img-fluid" alt="Imagem Base" style="width: 100%; height: auto;">
+                            </div>
+
+                            <!-- Descrição do Post -->
+                            <span style="position: absolute; bottom: 10%; top: 83.7%; left: 9%; right: 10%; font-size: 12px; font-weight: bold; color: #000000; text-align: left; white-space: pre-wrap; ">
+                                @("         " + descricaoPost)
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Feedback -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="feedbackModalLabel">Motivo do Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="motivo">Motivo</label>
+                    <textarea id="motivo" class="form-control" rows="3" placeholder="Informe o motivo do status" disabled>As cores não ornaram muito bem, tente outra paleta.</textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConfirmacao">Enviar Feedback</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .overlay-container {
+        position: absolute;
+        top: 37%;
+        left: 20.6%;
+        width: 60%;
+        height: 31%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .overlay-image {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+</style>
+
+<ModalConfirmacao Sucesso="true"/>
+
+@code {
+    [Parameter]
+    public bool recusada { get; set; }
+
+    private string descricaoPost = "Os nossos descontos de Halloween estão de arrepiar! 🎃 Aproveite antes que desapareçam! Oferta válida até 31/10. #Halloween #Promoção";
+}

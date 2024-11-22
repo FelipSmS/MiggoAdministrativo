@@ -4,15 +4,15 @@
 <PageTitle>Lista de Solicitações</PageTitle>
 
 <div class="container-fluid mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 text-gray-800">Minhas Solicitações</h1>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCriarSolicitacao">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+        <h1 class="h3 text-gray-800 text-center text-md-left">Minhas Solicitações</h1>
+        <button type="button" class="btn btn-primary mt-3 mt-md-0" data-bs-toggle="modal" data-bs-target="#modalCriarSolicitacao">
             Criar Solicitação
         </button>
     </div>
     <div class="row">
         <!-- Barra Lateral de Filtros -->
-        <div class="col-lg-2 mb-4">
+        <div class="col-12 col-md-4 col-lg-3 mb-4">
             <div class="card shadow">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Filtros</h6>
@@ -61,7 +61,7 @@
         </div>
 
         <!-- Tabela de Solicitações -->
-        <div class="col-lg-10">
+        <div class="col-12 col-md-8 col-lg-9">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Solicitações</h6>
@@ -91,7 +91,7 @@
                                         <span class="badge badge-success">Concluído</span>
                                     </td>
                                     <td>2024-10-15</td>
-                                    <td><i class="bi bi-file-earmark-text"></i></td>
+                                    <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCriarSolicitacao">Ver</button></td>
                                 </tr>
                                 <!-- Adicione mais linhas conforme necessário -->
                             </tbody>

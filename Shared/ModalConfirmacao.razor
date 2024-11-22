@@ -1,0 +1,36 @@
+
+    <div class="modal fade" id="modalConfirmacao">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mx-auto fw-bold" id="modalConfirmacaoLabel">Confirmação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                @if (Sucesso)
+                {
+                <div class="modal-body text-center">
+                    <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+                    <h1 class="mt-3 font-weight-bold text-primary">Ação realizada com sucesso.</h1>
+                </div>
+                }
+                else
+                {
+                    <div class="modal-body text-center">
+                        <i class="bi bi-x-circle-fill text-danger" style="font-size: 4rem;"></i>
+                        <h1 class="mt-3 font-weight-bold text-primary">Erro ao realizar ação.</h1>
+                    </div>
+                }
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn w-100" style="background-color: #40686b; color: white;" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@code {
+
+    [Parameter] public bool Sucesso { get; set; }
+
+}

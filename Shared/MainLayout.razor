@@ -7,6 +7,7 @@
 @code {
     bool isAuthenticated = false; // Ajuste para testar o comportamento sem autenticação
     bool alreadyRedirected = false; // Variável para evitar redirecionamentos em loop
+    string currentRoute;
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -24,14 +25,17 @@
         }
         isAuthenticated = true;
     }
+
+    protected override void OnParametersSet()
+    {
+        currentRoute = Navigation.Uri;
+    }
 }
 
 <!-- Envolve tudo em uma div que usa flexbox para layout -->
 <div class="d-flex vh-100">
-
-    @if (isAuthenticated)
+    @if (isAuthenticated && !currentRoute.Contains("/login"))
     {
-        <!-- Sidebar - Só é mostrado se o usuário estiver autenticado -->
         <LeftSideBar />
     }
 
@@ -39,5 +43,4 @@
     <main class="flex-grow-2">
         @Body
     </main>
-
 </div>

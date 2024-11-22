@@ -10,12 +10,14 @@
                 <p class="text-muted">Não será possível encontrar os dados desse usuário posteriormente</p>
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button type="button" class="btn w-100" style="background-color: #40686b; color: white;" @onclick="ExcluirUsuario">Excluir</button>
+                <button type="button" class="btn w-100" style="background-color: #40686b; color: white;" @onclick="ExcluirUsuario" data-bs-toggle="modal" data-bs-target="#modalConfirmacao">Excluir</button>
             </div>
         </div>
     </div>
 </div>
 
+
+<ModalConfirmacao Sucesso="true"/>
 @code {
     private void ExcluirUsuario()
     {
